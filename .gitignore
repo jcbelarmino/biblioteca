@@ -1,0 +1,11 @@
+target
+*.class
+.settings
+src/main/webapp/bower_components
+src/main/webapp/app.json
+.tern-project
+*~
+target
+bin
+.project
+.classpath
