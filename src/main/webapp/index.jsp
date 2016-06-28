@@ -2,7 +2,7 @@
 <%@page contentType="text/html" %>
 <html>
         <body>
-                <a href="http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=TST-3" target="_blank">Acceso a Revista dos Tribunais</a>
+                <a href="http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=[USER]" target="_blank">Acceso a Revista dos Tribunais</a>
         </body>
 </html>
 
