@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.google.gson.Gson;
@@ -47,24 +49,17 @@ public class TokenServlet extends HttpServlet {
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet(
 					"http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=TST-3");
+			HttpHost proxy = new HttpHost("localhost", 3128);
+			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 			HttpResponse response = client.execute(request);
 			BufferedReader rd = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent()));
 			String resultado = "";
-			while ((resultado = rd.readLine()) != null) {
-				System.out.println(resultado);
+			String linha = "";
+			while ((linha = rd.readLine()) != null) {
+				resultado+=linha;
 			}
-
-			// HttpClient httpclient = new HttpClient();
-			// ClientExecutor clientExecutor = new
-			// ApacheHttpClientExecutor(httpclient);
-			// ClientRequestFactory factory = new
-			// ClientRequestFactory(clientExecutor, new URI(""));
-			// ClientRequest request = factory
-			// .createRequest("http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=[USUARIO]");
-
-			// obtendo o resultado do WebService via GET
-			// String resultado = request.getTarget(String.class);
+			System.out.println("resultado:"+resultado+"|");
 
 			Gson gson = new Gson();
 			Token t = gson.fromJson(resultado, Token.class);
@@ -78,9 +73,12 @@ public class TokenServlet extends HttpServlet {
 
 	}
 
-	class Token {
+	public class Token {
 		private String token;
 
+		public Token() {
+			// TODO Auto-generated constructor stub
+		}
 		public String getToken() {
 			return this.token;
 		}
