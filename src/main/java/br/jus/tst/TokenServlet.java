@@ -48,7 +48,7 @@ public class TokenServlet extends HttpServlet {
 
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet(
-					"http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=TST-3");
+					"http://revistadostribunais.com.br/maf/api/v1/authenticate.json?sp=[USUARIO]");
 			HttpHost proxy = new HttpHost("localhost", 3128);
 			client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 			HttpResponse response = client.execute(request);
